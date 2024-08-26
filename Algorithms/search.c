@@ -67,6 +67,7 @@ int main() {
     int bin_t = bin_t2 - bin_t1;
     printf("For an arr[%d], lin_search takes %d clk cycles whereas bin_search takes %d clk cycles", 
             ARRAY_SIZE, lin_t, bin_t);
+    // For an arr[100000], lin_search takes 813 clk cycles whereas bin_search takes 0 clk cycles
     // For an arr[1000000], lin_search takes 8585 clk cycles whereas bin_search takes 1 clk cycles
     free(arr); // Clean up
     return 0;
