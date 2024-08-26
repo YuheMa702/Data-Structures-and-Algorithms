@@ -1,5 +1,8 @@
 /*
-bubble sort vs merge sort vs quicksort
+1. Selection
+2. Bubble Sort
+3. Mergesort
+4. Quicksort
 */
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,8 +19,8 @@ Quick_sort time: 55
 
 With ARRAY_SIZE = 10000, TEST_NUMS = 10
 Bub_sort time: 943    O(n^2)
-Merge_sort time: 52   O(nlogn)
-Quick_sort time: 6    O(nlogn)
+Merge_sort time: 52   O(nlogn) 
+Quick_sort time: 6    O(nlogn) In-place
 
 With ARRAY_SIZE = 100000, TEST_NUMS = 10
 Bub_sort time: 167759
@@ -25,15 +28,31 @@ Merge_sort time: 3408
 Quick_sort time: 66
 */
 
-
-
-
 void print_arr(int* arr, int len) {
     for (int i = 0; i < len; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
 }
+
+
+// O(n^2)
+void sel_sort(int* arr, int n) {
+    if (n <= 1) return; // Already sorted
+    for (int i = 0; i < n - 1; i++) {
+        int temp = arr[i];
+        int lo_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            // Find the idx of smallest val in range [i, n)
+            if (arr[j] < temp) lo_idx = j;
+        }
+        //swap
+        arr[i] = arr[lo_idx];
+        arr[lo_idx] = temp; 
+    }
+}
+
+
 
 // O(n^2) Compare pairs of numbers and large value bubbles from left to right
 void bub_sort(int* arr, int n) {
@@ -122,7 +141,7 @@ int partition(int* arr, int lo, int hi) {
         int left = arr[i];
         int right = arr[j];
         if (right < pvt) {
-            // Update pvt's position
+            // Update pvt's position if needed
             if (i == p) p = j;
             else if (j == p) p = i;
             // Swap: move smaller to the left
@@ -131,7 +150,7 @@ int partition(int* arr, int lo, int hi) {
             arr[i] = right;
             i++;
         } else {
-            // Right jth elem
+            // Right jth elem fixed, no swap needed
             j--;
         }
     }
@@ -141,6 +160,7 @@ void quick_sort(int* arr, int lo, int hi) {
     if (hi - lo <= 1) return; // Already sorted
 
     int p = partition(arr, lo, hi);
+    // At lowest level, [lo, p) and [p, hi) sorted
     quick_sort(arr, lo, p);
     quick_sort(arr, p, hi);
 }
@@ -189,6 +209,7 @@ int main() {
         sum += (end - start);
     }
     printf("Quick_sort time: %d\n", sum);
+    // clean up
     free(arr);
     free(cp);
     return 0;
