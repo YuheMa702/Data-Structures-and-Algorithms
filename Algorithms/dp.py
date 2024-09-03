@@ -18,4 +18,17 @@ def nth_fib(n):
         return b1
     
 
-
+#Problem: Given an array of integers, find the length of the longest increasing subsequence.
+def length_of_LIS(nums):
+    if not nums:
+        return 0
+    
+    # Initialize dp array where dp[i] represents the length of LIS ending at index i
+    dp = [1] * len(nums)
+    
+    for i in range(len(nums)):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    
+    return max(dp)
