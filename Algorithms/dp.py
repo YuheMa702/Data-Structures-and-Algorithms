@@ -2,6 +2,11 @@
 Dynamic Programming: Save reusable answers from subproblems to solve big problem
 '''
 
+'''
+Python tricks: use dir(variable) to check all methods of a datatype, then use help(v.method)
+'''
+
+
 def nth_fib(n):
     b0 = 0
     b1 = 1
