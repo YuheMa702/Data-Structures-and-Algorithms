@@ -1,4 +1,4 @@
-# This is an elegant quicksort algorithm implemented in python, very elegent!
+# This is an elegant quicksort algorithm implemented in python, very elegant!
 
 
 def quickSort(lst):
